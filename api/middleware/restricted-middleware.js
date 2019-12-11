@@ -7,17 +7,17 @@ const restricted = (req, res, next) => {
 	if (token) {
 		jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
 			if (err) {
-				res.status(401)
+				// Don't forget to terminate the process
+				res.status(401).end()
 			} else {
 				req.decodedJwt = decodedToken;
 				next();
 			}
 		})
 	} else {
-		res.status(403)
+		// Don't forget to terminate the process
+		res.status(403).end()
 	}
 }
 
-module.exports = {
-	restricted
-}
+module.exports = restricted

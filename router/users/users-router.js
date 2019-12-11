@@ -3,8 +3,6 @@ const router = require('express').Router();
 const Users = require('./users-model.js');
 const restricted = require('../../api/middleware/restricted-middleware.js')
 
-// Should bring in the restricted middleware.
-
 router.get('/', restricted, async (req, res) => {
 	try {
 		const request = await Users.find();
@@ -13,3 +11,5 @@ router.get('/', restricted, async (req, res) => {
 		res.status(500).json({ error: e.message })
 	}
 })
+
+module.exports = router

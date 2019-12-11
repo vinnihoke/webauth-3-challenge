@@ -19,5 +19,8 @@ const add = async (user) => {
 }
 
 module.exports = {
-	find
+	find,
+	findBy,
+	findById,
+	add
 }
