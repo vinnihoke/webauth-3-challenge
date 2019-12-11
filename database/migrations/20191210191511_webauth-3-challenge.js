@@ -1,20 +1,15 @@
 
-exports.up = function(knex) {
-  return knex.schema
-  	.createTable('users', column => {
-		  column.increments();
-		  column.string('username', 128).notNullable().unique()
-		  column.string('passowrd', 128).notNullable()
-	  })
-	  .createTable('departments', column => {
+exports.up = function (knex) {
+	return knex.schema
+		.createTable('users', column => {
 			column.increments();
-			column.string('department', 30).notNullable().unique()
-			column.integer('user_id').unsigned().notNullable().references('id').inTable('users').onDelete("CASCADE").onUpdate("CASCADE")
-	  })
+			column.string('username', 128).notNullable().unique()
+			column.string('password', 128).notNullable()
+			column.string('department', 30).notNullable()
+		})
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
 	return knex.schema
-		.dropTableIfExists('departments')
 		.dropTableIfExists('users')
 };
