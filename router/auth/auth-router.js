@@ -9,11 +9,11 @@ const generateToken = user => {
 	const payload = {
 		subject: user.id,
 		username: user.username,
-		department: ["Accounting"]
+		department: [user.department]
 	};
 
 	const options = {
-		expiresIn: '1m',
+		expiresIn: '3m',
 	};
 
 	return jwt.sign(payload, secrets.jwtSecret, options)
