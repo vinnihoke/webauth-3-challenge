@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
 		const registered = await Users.add(user);
 		res.status(201).json(registered)
 	} catch (e) {
-		res.status(500).json({ error: e })
+		res.status(500).json({ error: e.message })
 	}
 })
 
@@ -38,14 +38,14 @@ router.post('/login', async (req, res) => {
 	let { username, password } = req.body;
 	try {
 		const registered = await Users.findBy({ username }).first();
-		if (user && bcrypt.compareSync(password, user.password)) {
-			const token = generateToken(user);
+		if (registered && bcrypt.compareSync(password, registered.password)) {
+			const token = generateToken(registered);
 			res.status(200).json(token)
 		} else {
 			res.status(401)
 		}
 	} catch (e) {
-		res.status(500).json({ error: e });
+		res.status(500).json({ error: e.message });
 	}
 })
 

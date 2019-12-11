@@ -15,7 +15,7 @@ const findById = (id) => {
 
 const add = async (user) => {
 	const [id] = await db('users').insert(user);
-	return fundById(id);
+	return findById(id);
 }
 
 module.exports = {
